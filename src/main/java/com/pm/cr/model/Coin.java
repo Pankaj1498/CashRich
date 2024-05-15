@@ -8,12 +8,20 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
-
-public class Quote {
+@Entity
+public class Coin {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "status_id")
+	private Status status;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "data_id")
+	private Data data;
 
 	public Long getId() {
 		return id;
@@ -23,16 +31,19 @@ public class Quote {
 		this.id = id;
 	}
 
-	public USD getUsd() {
-		return USD;
+	public Status getStatus() {
+		return status;
 	}
 
-	public void setUsd(USD usd) {
-		this.USD = usd;
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "usd_id")
-	private USD USD;
+	public Data getData() {
+		return data;
+	}
 
+	public void setData(Data data) {
+		this.data = data;
+	}
 }
