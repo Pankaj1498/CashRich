@@ -1,0 +1,28 @@
+package com.pm.cr.controller;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.pm.cr.model.RegistrationModel;
+import com.pm.cr.service.RegistrationService;
+
+@RestController
+@RequestMapping("/api/v1/")
+@CrossOrigin("*")
+public class RegistrationController {
+
+	@Autowired
+	private RegistrationService registrationService;
+
+	@PostMapping("/register-user")
+	public RegistrationModel registerUser(@Valid @RequestBody RegistrationModel registrationModel) throws Exception {
+		return registrationService.createUser(registrationModel);
+	}
+
+}
